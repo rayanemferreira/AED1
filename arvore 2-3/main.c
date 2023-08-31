@@ -26,6 +26,7 @@ int main(int argc, char *argv)
 
     printf("\nÁrvore:\n");
     imprime(arvore, 0);
+    search(arvore, 7);
 
     return 0;
 }

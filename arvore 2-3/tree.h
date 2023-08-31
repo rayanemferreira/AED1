@@ -359,24 +359,46 @@ void removeMin(TreeNode *arvore, int key)
         else if (key > aux->keys[0] && aux->children[2] != NULL)
         {
             aux = aux->children[2];
-            // printf("\ndir");
+            
         }
     }
 }
-//     TreeNode *aux;
-//     if (arvore == NULL)
-//     {
 
-//         return;
-//     }
+int search(TreeNode *tree, int value)
+{   
+    int i;
+    int pos;
 
-//     if (arvore->children[0] != NULL)
-//     {
-//         aux = arvore;
-//         arvore = arvore->children[1];
-//         free(aux);
-//         return arvore;
-//     }
-//     return arvore;
+    // Verifica se a árvore não está vazia
+    if (tree != NULL)
+    {   
+        // Percorre as chaves do nó da árvore
+        for (i = 0; i < tree->num_keys; i++)
+        {   
+            // Se o valor foi encontrado retorna 1
+            if (tree->keys[i] == value)
+            {
+                printf("Value %d was found \n", value);
+                return 1;
+            }
+            // Se o valor buscado for menor que a primeira chave do árvore, a busca segue a subárvore esquerda
+            else if (value < tree->keys[i])
+                pos = 0;
+            
+            // Se o valor buscado está entre as duas chaves da árvore, a busca segue a subárvore do meio
+            else if (value > tree->keys[i] && value < tree->keys[i+1])
+                pos = 1;
 
-// }
+            // Se o valor buscado for maior que a segunda chave da árvore, a busca segue a subárvore direita 
+            else if (value > tree->keys[i+1])
+                pos = 2;
+        }
+
+        // Chamada recursiva para a busca, seguindo uma subárvore 
+        return search(tree->children[pos], value);
+    }
+
+    // Se o valor não foi encontrado, retorna nulo
+    printf("Value not found \n");
+    return 0;
+}
