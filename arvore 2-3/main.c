@@ -20,13 +20,13 @@ int main(int argc, char *argv)
 
     removeMin(arvore, 5);
     removeMin(arvore, 15);
-    // removeMin(arvore, 2);
+    //  removeMin(arvore, 2);
 
     // removeMin(arvore, 15);
 
     printf("\nÁrvore:\n");
     imprime(arvore, 0);
-    search(arvore, 7);
+    search(arvore, 2);
 
     return 0;
 }

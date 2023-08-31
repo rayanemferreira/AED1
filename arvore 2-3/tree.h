@@ -359,42 +359,57 @@ void removeMin(TreeNode *arvore, int key)
         else if (key > aux->keys[0] && aux->children[2] != NULL)
         {
             aux = aux->children[2];
-            
         }
     }
 }
 
 int search(TreeNode *tree, int value)
-{   
+{
     int i;
     int pos;
 
     // Verifica se a árvore não está vazia
     if (tree != NULL)
-    {   
+    {
         // Percorre as chaves do nó da árvore
-        for (i = 0; i < tree->num_keys; i++)
-        {   
-            // Se o valor foi encontrado retorna 1
-            if (tree->keys[i] == value)
+        // Se o valor foi encontrado retorna 1
+        if (tree->num_keys == 1)
+        {
+            if (tree->keys[0] == value)
+            {
+                printf("Value %d was found \n", value);
+                return 1;
+            }
+            else if (value < tree->keys[0])
+                pos = 0;
+            else if (value > tree->keys[0])
+                pos = 2;
+        }
+        else
+        {
+            if (tree->keys[0] == value)
             {
                 printf("Value %d was found \n", value);
                 return 1;
             }
             // Se o valor buscado for menor que a primeira chave do árvore, a busca segue a subárvore esquerda
-            else if (value < tree->keys[i])
+            else if (value < tree->keys[0])
                 pos = 0;
-            
-            // Se o valor buscado está entre as duas chaves da árvore, a busca segue a subárvore do meio
-            else if (value > tree->keys[i] && value < tree->keys[i+1])
-                pos = 1;
 
-            // Se o valor buscado for maior que a segunda chave da árvore, a busca segue a subárvore direita 
-            else if (value > tree->keys[i+1])
+            // Se o valor buscado está entre as duas chaves da árvore, a busca segue a subárvore do meio
+            else if (value > tree->keys[0] && value < tree->keys[1])
+                pos = 1;
+            else if (tree->keys[1] == value)
+            {
+                printf("Value %d was found \n", value);
+                return 1;
+            }
+            // Se o valor buscado for maior que a segunda chave da árvore, a busca segue a subárvore direita
+            else if (value > tree->keys[1])
                 pos = 2;
         }
 
-        // Chamada recursiva para a busca, seguindo uma subárvore 
+        // Chamada recursiva para a busca, seguindo uma subárvore
         return search(tree->children[pos], value);
     }
 
